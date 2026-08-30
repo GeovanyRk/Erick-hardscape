@@ -6,7 +6,44 @@
 <title>Monroy Stone Works — Hardscape &amp; Outdoor Living in Greensboro, NC</title>
 <meta name="description" content="Monroy Stone Works builds patios, retaining walls, pool decks, outdoor kitchens, and driveways in Greensboro, NC. Free, no-obligation quotes." data-es="Monroy Stone Works construye patios, muros de retención, áreas de piscina, cocinas exteriores y entradas en Greensboro, Carolina del Norte. Cotizaciones gratuitas sin compromiso." />
 
+<link rel="canonical" href="https://stonemonroy.com/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Monroy Stone Works" />
+<meta property="og:title" content="Monroy Stone Works — Hardscape &amp; Outdoor Living in Greensboro, NC" />
+<meta property="og:description" content="Monroy Stone Works builds patios, retaining walls, pool decks, outdoor kitchens, and driveways in Greensboro, NC. Free, no-obligation quotes." />
+<meta property="og:url" content="https://stonemonroy.com/" />
+<meta property="og:image" content="https://stonemonroy.com/assets/img/hero.webp" />
+<meta property="og:locale" content="en_US" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Monroy Stone Works — Hardscape &amp; Outdoor Living in Greensboro, NC" />
+<meta name="twitter:description" content="Monroy Stone Works builds patios, retaining walls, pool decks, outdoor kitchens, and driveways in Greensboro, NC. Free, no-obligation quotes." />
+<meta name="twitter:image" content="https://stonemonroy.com/assets/img/hero.webp" />
+
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HomeAndConstructionBusiness",
+  "name": "Monroy Stone Works",
+  "url": "https://stonemonroy.com/",
+  "image": "https://stonemonroy.com/assets/img/hero.webp",
+  "telephone": "+1-336-306-3941",
+  "email": "Erik@monroystoneworks.com",
+  "areaServed": {
+    "@type": "City",
+    "name": "Greensboro, NC"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "opens": "07:00",
+    "closes": "18:00"
+  }
+}
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -76,6 +113,11 @@
     </div>
   </section>
 
+  <!-- NOTE (Phase 1 audit, 2026-08-29): "15+ years of experience" and "500+ projects completed" below
+       are values that were already present in this codebase before this audit. They have NOT been
+       verified as accurate by the business owner (Erik). Do not treat them as confirmed marketing
+       claims, and do not reuse them elsewhere (schema.org, ads, etc.) until Erik confirms the real
+       numbers. See project audit doc for details. -->
   <section class="stats" aria-label="Company facts">
     <div class="container stats-grid">
       <div class="stat" data-reveal>
@@ -221,27 +263,6 @@
     </div>
   </section>
 
-  <section class="testimonials">
-    <div class="container">
-      <p class="kicker" data-es="Lo que Dicen">What Clients Say</p>
-      <h2 data-split="words" data-es="Clientes que ya Viven Afuera">Clients Already Living Outside</h2>
-      <div class="testimonials-grid">
-        <blockquote class="testimonial" data-reveal>
-          <p data-es="Llegaron con un plan claro y cumplieron exactamente lo acordado. El patio quedó mejor de lo que imaginábamos.">"They showed up with a clear plan and delivered exactly what we agreed on. The patio turned out better than we imagined."</p>
-          <footer><strong>Sarah M.</strong> <span data-es="· Patio de Adoquín y Fire Pit">· Paver Patio &amp; Fire Pit</span></footer>
-        </blockquote>
-        <blockquote class="testimonial" data-reveal>
-          <p data-es="Nuestro patio tuvo un problema de drenaje durante años. El muro de retención lo resolvió y además se ve muy bien.">"Our yard had a drainage problem for years. The retaining wall fixed it and looks great."</p>
-          <footer><strong>Mike T.</strong> <span data-es="· Muro de Retención">· Retaining Wall</span></footer>
-        </blockquote>
-        <blockquote class="testimonial" data-reveal>
-          <p data-es="La cocina exterior es donde pasamos cada fin de semana ahora. Vale cada centavo.">"The outdoor kitchen is where we spend every weekend now. Worth every penny."</p>
-          <footer><strong>Jennifer R.</strong> <span data-es="· Cocina Exterior">· Outdoor Kitchen</span></footer>
-        </blockquote>
-      </div>
-    </div>
-  </section>
-
   <section class="cta-quote" id="contact">
     <div class="container cta-grid">
       <div class="cta-text">
@@ -256,7 +277,11 @@
         </ul>
       </div>
       <div class="cta-form-wrap">
-        <form class="cta-form" data-contact-form novalidate>
+        <form class="cta-form" data-contact-form action="https://formspree.io/f/mjyvkngr" method="POST" novalidate>
+          <div class="field field-hp" aria-hidden="true">
+            <label for="f-gotcha">Company</label>
+            <input type="text" name="_gotcha" id="f-gotcha" tabindex="-1" autocomplete="off" />
+          </div>
           <div class="field">
             <input type="text" name="name" id="f-name" required placeholder=" " />
             <label for="f-name" data-es="Nombre">Name</label>
@@ -291,8 +316,9 @@
             <svg class="cta-form-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12.5l5 5L20 6" pathLength="1" /></svg>
           </button>
         </form>
+        <div class="cta-form-error" data-contact-error role="alert" aria-live="polite"></div>
         <div class="cta-success" data-contact-success aria-hidden="true">
-          <h3 data-es="Recibido.">Received.</h3>
+          <h3 data-es="Solicitud Enviada.">Request Sent.</h3>
           <p data-contact-success-msg></p>
         </div>
       </div>
@@ -316,7 +342,6 @@
 
 <script defer src="lib/gsap.min.js"></script>
 <script defer src="lib/ScrollTrigger.min.js"></script>
-<script defer src="lib/manifest.js"></script>
-<script defer src="main.js?v=20260705"></script>
+<script defer src="main.js?v=20260829"></script>
 </body>
 </html>
