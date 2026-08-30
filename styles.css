@@ -384,19 +384,6 @@ p { color: var(--cream-2); }
 .featured-figure img { width: 100%; height: 100%; object-fit: cover; }
 .featured-caption { margin-top: 1.4rem; color: var(--cream-3); font-size: 0.95rem; max-width: 62ch; }
 
-/* --- Testimonials --- */
-.testimonials { padding-block: clamp(4rem, 10vw, 7rem); }
-.testimonials h2 { margin-bottom: 2.4rem; }
-.testimonials-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 1.6rem; }
-@media (min-width: 860px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
-.testimonial {
-  background: var(--bg-3); border: 1px solid var(--line); border-radius: 16px;
-  padding: 1.8rem;
-}
-.testimonial p { font-family: var(--serif); font-style: italic; font-size: 1.08rem; color: var(--cream); margin-bottom: 1.2rem; }
-.testimonial footer { font-size: 0.85rem; color: var(--cream-3); }
-.testimonial footer strong { color: var(--cream-2); }
-
 /* --- CTA / Quote form --- */
 .cta-quote { padding-block: clamp(4rem, 10vw, 8rem); background: var(--bg-2); border-top: 1px solid var(--line); }
 .cta-grid { display: grid; gap: 3rem; }
@@ -418,6 +405,28 @@ p { color: var(--cream-2); }
 }
 .field textarea { resize: vertical; min-height: 90px; }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); outline: none; }
+
+/* Chrome / Edge autofill: keep a single clean text layer and preserve the approved field styling */
+.field input:-webkit-autofill,
+.field input:-webkit-autofill:hover,
+.field input:-webkit-autofill:focus,
+.field input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--cream);
+  caret-color: var(--cream);
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-3) inset;
+  box-shadow: 0 0 0 1000px var(--bg-3) inset;
+  border: 1px solid var(--line);
+  transition: background-color 9999s ease-out 0s;
+}
+
+/* Make sure the floating label stays in its small position when Chrome autofills the field */
+.field input:-webkit-autofill + label {
+  top: 0.35rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .field label {
   position: absolute; left: 1rem; top: 1.05rem;
   pointer-events: none; transition: all .25s var(--ease-out);
@@ -461,6 +470,17 @@ p { color: var(--cream-2); }
 }
 .cta-success.is-visible { opacity: 1; transform: translate(-50%, -50%); pointer-events: auto; }
 .cta-success h3 { color: var(--accent); margin-bottom: 0.6rem; }
+
+/* Honeypot field: off-screen, never shown to real visitors, invisible to layout */
+.field-hp { position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Real-submission error state (only shown if the server does not confirm success) */
+.cta-form-error {
+  font-size: 0.85rem; color: var(--accent);
+  max-height: 0; opacity: 0; overflow: hidden;
+  transition: opacity .3s var(--ease-out), max-height .3s var(--ease-out);
+}
+.cta-form-error.is-visible { opacity: 1; max-height: 4rem; margin-top: -0.2rem; }
 
 /* --- Footer --- */
 .footer { padding-block: 2.5rem; border-top: 1px solid var(--line); }
