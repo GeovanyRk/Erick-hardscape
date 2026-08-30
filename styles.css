@@ -126,26 +126,6 @@ p { color: var(--cream-2); }
 
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.2rem; }
 
-/* Cursor */
-.cursor {
-  position: fixed; top: 0; left: 0;
-  pointer-events: none; z-index: 9999;
-  display: none;
-  mix-blend-mode: difference;
-  opacity: 0;
-  transition: opacity .25s var(--ease-out);
-}
-.cursor.is-ready { opacity: 1; }
-@media (hover: hover) and (pointer: fine) { .cursor { display: block; } }
-.cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; will-change: transform; }
-.cursor-dot { width: 5px; height: 5px; margin: -2.5px; background: var(--cream); border-radius: 50%; }
-.cursor-ring {
-  width: 32px; height: 32px; margin: -16px; border: 1px solid var(--cream); border-radius: 50%;
-  transition: width .35s var(--ease-out), height .35s var(--ease-out), margin .35s var(--ease-out);
-}
-.cursor.is-interactive .cursor-ring { width: 48px; height: 48px; margin: -24px; }
-.has-cursor, .has-cursor a, .has-cursor button { cursor: none; }
-
 /* Reveal */
 [data-reveal] {
   opacity: 0; transform: translateY(36px);

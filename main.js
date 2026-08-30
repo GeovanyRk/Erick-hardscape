@@ -165,40 +165,6 @@
     });
   }
 
-  /* ---------- Cursor ---------- */
-  function initCursor() {
-    const root = $("[data-cursor-root]");
-    if (!root || !fineHover) return;
-    document.documentElement.classList.add("has-cursor");
-    const ring = $(".cursor-ring", root);
-    const dot = $(".cursor-dot", root);
-    let tx = 0, ty = 0, rx = 0, ry = 0, firstMove = false;
-
-    window.addEventListener("mousemove", e => {
-      tx = e.clientX; ty = e.clientY;
-      if (dot) dot.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
-      if (!firstMove) {
-        firstMove = true; rx = tx; ry = ty;
-        if (ring) ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
-        root.classList.add("is-ready");
-      }
-    }, { passive: true });
-
-    function tick() {
-      rx += (tx - rx) * 0.18; ry += (ty - ry) * 0.18;
-      if (ring) ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
-      requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-
-    const HOVERABLES = ".card, .service-card, .featured-figure, .btn, a[href]";
-    document.addEventListener("mouseover", e => { if (e.target.closest(HOVERABLES)) root.classList.add("is-interactive"); });
-    document.addEventListener("mouseout", e => {
-      if (e.target.closest(HOVERABLES) && !(e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest(HOVERABLES)))
-        root.classList.remove("is-interactive");
-    });
-  }
-
   /* ---------- Hero parallax ---------- */
   function initHeroParallax() {
     if (!window.gsap || !window.ScrollTrigger || reduced) return;
@@ -420,7 +386,6 @@
     safe(initReveals, "initReveals");
     safe(initRevealMask, "initRevealMask");
     safe(initTilt, "initTilt");
-    safe(initCursor, "initCursor");
     safe(setupContactForm, "setupContactForm");
     safe(initYear, "initYear");
 
