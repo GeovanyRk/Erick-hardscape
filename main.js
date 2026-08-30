@@ -289,28 +289,69 @@
     if (!form || !success) return;
     const submitBtn = $("[type=submit]", form);
     const msg = $("[data-contact-success-msg]");
+    const errorBox = $("[data-contact-error]", form.closest(".cta-form-wrap") || document);
+
+    function showError(isEs) {
+      form.classList.remove("is-sending");
+      form.classList.add("is-error");
+      submitBtn.disabled = false;
+      if (errorBox) {
+        errorBox.textContent = isEs
+          ? "No pudimos enviar tu solicitud. Intenta de nuevo o llámanos al (336) 306-3941."
+          : "We couldn't send your request. Please try again, or call us at (336) 306-3941.";
+        errorBox.classList.add("is-visible");
+      }
+    }
 
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       if (form.classList.contains("is-sending")) return;
       if (!form.reportValidity()) return;
 
+      const isEs = document.documentElement.getAttribute("data-lang") === "es";
+
+      form.classList.remove("is-error");
+      if (errorBox) errorBox.classList.remove("is-visible");
       form.classList.add("is-sending");
       submitBtn.disabled = true;
 
-      setTimeout(() => {
-        const isEs = document.documentElement.getAttribute("data-lang") === "es";
-        const firstName = (form.elements.name.value || "").trim().split(/\s+/)[0] || (isEs ? "Hola" : "Hi");
-        if (msg) {
-          msg.textContent = isEs
-            ? `${firstName}, recibimos tu solicitud. Te contactaremos pronto para coordinar la visita.`
-            : `${firstName}, we've received your request. We'll be in touch shortly to schedule a visit.`;
-        }
-        form.classList.remove("is-sending");
-        form.classList.add("is-sent");
-        success.setAttribute("aria-hidden", "false");
-        success.classList.add("is-visible");
-      }, 800 + Math.random() * 500);
+      const endpoint = form.getAttribute("action");
+      if (!endpoint) { showError(isEs); return; }
+      const body = new FormData(form);
+
+      fetch(endpoint, {
+        method: "POST",
+        body,
+        headers: { "Accept": "application/json" },
+      })
+        .then(res => res.json().catch(() => null).then(json => ({ ok: res.ok, json })))
+        .then(({ ok, json }) => {
+          // Formspree does not use our old {success:true} shape. Success is the
+          // HTTP response itself being OK, with a parseable JSON body and no
+          // Formspree-reported errors. Any other outcome (bad status, unparseable
+          // body, or an explicit errors[] from Formspree) falls through to the
+          // existing error state — never a false success.
+          const hasFormspreeErrors =
+            json &&
+            Array.isArray(json.errors) &&
+            json.errors.length > 0;
+
+          if (!ok || hasFormspreeErrors) {
+            showError(isEs);
+            return;
+          }
+          const firstName = (form.elements.name.value || "").trim().split(/\s+/)[0] || (isEs ? "Hola" : "Hi");
+          if (msg) {
+            msg.textContent = isEs
+              ? `${firstName}, tu solicitud fue enviada correctamente. Te contactaremos pronto para coordinar la visita.`
+              : `${firstName}, your request has been submitted. We'll be in touch shortly to schedule a visit.`;
+          }
+          form.classList.remove("is-sending");
+          form.classList.add("is-sent");
+          success.setAttribute("aria-hidden", "false");
+          success.classList.add("is-visible");
+        })
+        .catch(() => showError(isEs));
     });
   }
 
