@@ -383,6 +383,8 @@ p { color: var(--cream-2); }
 .featured-figure { border-radius: 18px; overflow: hidden; aspect-ratio: 16/9; }
 .featured-figure img { width: 100%; height: 100%; object-fit: cover; }
 .featured-caption { margin-top: 1.4rem; color: var(--cream-3); font-size: 0.95rem; max-width: 62ch; }
+.featured-grid { display: grid; grid-template-columns: 1fr; gap: 2.4rem; }
+@media (min-width: 900px) { .featured-grid { grid-template-columns: repeat(3, 1fr); gap: 1.8rem; } }
 
 /* --- CTA / Quote form --- */
 .cta-quote { padding-block: clamp(4rem, 10vw, 8rem); background: var(--bg-2); border-top: 1px solid var(--line); }
