@@ -289,6 +289,7 @@ p { color: var(--cream-2); }
 @media (min-width: 720px) { .stats-grid { grid-template-columns: repeat(3, 1fr); } }
 .stat-value { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--accent); display: block; }
 .stat-label { color: var(--cream-3); font-size: 0.85rem; letter-spacing: 0.02em; }
+.offer-note { color: var(--cream-3); font-size: 0.85rem; margin-top: 1rem; }
 
 /* --- Manifesto --- */
 .manifesto { padding-block: clamp(4rem, 10vw, 8rem); }
