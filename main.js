@@ -257,19 +257,23 @@
     const msg = $("[data-contact-success-msg]");
     const errorBox = $("[data-contact-error]", form.closest(".cta-form-wrap") || document);
 
-    function showError(isEs) {
+    function showError(isEs, isRecaptchaError) {
       form.classList.remove("is-sending");
       form.classList.add("is-error");
       submitBtn.disabled = false;
       if (errorBox) {
-        errorBox.textContent = isEs
-          ? "No pudimos enviar tu solicitud. Intenta de nuevo o llámanos al (336) 306-3941."
-          : "We couldn't send your request. Please try again, or call us at (336) 306-3941.";
+        errorBox.textContent = isRecaptchaError
+          ? (isEs
+              ? "La verificación de seguridad falló. Inténtalo de nuevo."
+              : "Security verification failed. Please try again.")
+          : (isEs
+              ? "No pudimos enviar tu solicitud. Intenta de nuevo o llámanos al (336) 306-3941."
+              : "We couldn't send your request. Please try again, or call us at (336) 306-3941.");
         errorBox.classList.add("is-visible");
       }
     }
 
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (form.classList.contains("is-sending")) return;
       if (!form.reportValidity()) return;
@@ -284,6 +288,17 @@
       const endpoint = form.getAttribute("action");
       if (!endpoint) { showError(isEs); return; }
       const body = new FormData(form);
+
+      try {
+        if (typeof grecaptcha === "undefined") throw new Error("recaptcha-not-loaded");
+        await new Promise((resolve) => grecaptcha.ready(resolve));
+        const token = await grecaptcha.execute("6Lf_OKgtAAAAAHBTIpDEtCpdOV6ZNwxQtm-cuJZw", { action: "submit" });
+        if (!token) throw new Error("recaptcha-no-token");
+        body.set("g-recaptcha-response", token);
+      } catch (err) {
+        showError(isEs, true);
+        return;
+      }
 
       fetch(endpoint, {
         method: "POST",

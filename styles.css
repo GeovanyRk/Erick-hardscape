@@ -290,6 +290,7 @@ p { color: var(--cream-2); }
 .stat-value { font-family: var(--serif); font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--accent); display: block; }
 .stat-label { color: var(--cream-3); font-size: 0.85rem; letter-spacing: 0.02em; }
 .offer-note { color: var(--cream-3); font-size: 0.85rem; margin-top: 1rem; }
+.recaptcha-note { color: var(--cream-3); font-size: 0.72rem; opacity: 0.7; margin-top: 0.35rem; }
 
 /* --- Manifesto --- */
 .manifesto { padding-block: clamp(4rem, 10vw, 8rem); }
