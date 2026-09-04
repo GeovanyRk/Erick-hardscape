@@ -11,8 +11,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="styles.css?v=20260830">
 <style>
-  .legal-page { padding-block: 8rem 5rem; max-width: 760px; }
-  .legal-page .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); }
+  .legal-page { padding-block: 3rem 5rem; max-width: 760px; }
+  .legal-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-block: 1.6rem; border-bottom: 1px solid var(--line); }
+  .legal-top .legal-logo img { height: 40px; width: auto; display: block; }
+  .legal-top .legal-back { color: var(--cream-3); font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; }
   .legal-page h1 { font-size: clamp(2rem, 4.5vw, 3rem); margin-bottom: 0.6rem; }
   .legal-page .updated { color: var(--cream-3); font-size: 0.88rem; margin-bottom: 2.5rem; }
   .legal-page h2 { font-family: var(--sans); font-size: 1.1rem; margin-top: 2.4rem; margin-bottom: 0.8rem; color: var(--cream); }
@@ -22,8 +24,12 @@
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
+<div class="legal-top container">
+  <a href="index.html" class="legal-logo"><img src="assets/img/logo.webp" alt="Monroy Stone Works" /></a>
+  <a href="index.html" class="legal-back">&larr; Back to Home</a>
+</div>
+
 <main id="main" class="container legal-page">
-  <a href="index.html" class="back-link">&larr; Back to home</a>
   <p class="kicker">Legal</p>
   <h1>Terms of Use</h1>
   <p class="updated">Last updated: September 2026</p>

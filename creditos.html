@@ -11,17 +11,23 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="styles.css?v=20260830">
 <style>
-  .credits-page { padding-block: 8rem 5rem; }
-  .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent); }
+  .credits-page { padding-block: 3rem 5rem; }
+  .legal-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; padding-block: 1.6rem; border-bottom: 1px solid var(--line); }
+  .legal-top .legal-logo img { height: 40px; width: auto; display: block; }
+  .legal-top .legal-back { color: var(--cream-3); font-size: 0.85rem; text-decoration: underline; text-underline-offset: 3px; }
 </style>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
+<div class="legal-top container">
+  <a href="index.html" class="legal-logo"><img src="assets/img/logo.webp" alt="Monroy Stone Works" /></a>
+  <a href="index.html" class="legal-back">&larr; Back to Home</a>
+</div>
+
 <main id="main" class="container credits-page">
-  <a href="index.html" class="back-link">&larr; Back to home</a>
   <p class="kicker">Attributions</p>
   <h1 style="font-size:clamp(2rem,4.5vw,3rem);">Photo Credits</h1>
-  <p style="margin-top:1rem;max-width:60ch;">Every photo on this site is a real Monroy Stone Works project. No stock photography is currently in use.</p>
+  <p style="margin-top:1rem;max-width:60ch;">Project photography shown on this site features real Monroy Stone Works work unless otherwise noted.</p>
 </main>
 </body>
 </html>
